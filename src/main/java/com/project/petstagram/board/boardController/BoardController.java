@@ -26,15 +26,19 @@ public class BoardController {
 
     @PostMapping("/addContent")
     public ResponseEntity<BoardResponse> addContent(@RequestBody BoardRequest boardRequest){
-        return new ResponseEntity<>(boardService.addContent(boardRequest), HttpStatus.OK);
+        return new ResponseEntity(boardService.addContent(boardRequest), HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteContent")
+    @DeleteMapping("/deleteContent")
     public void deleteContent(@RequestParam Long boardNo){
          boardService.deleteContent(boardNo);
     }
 
+    @PutMapping("/modifyContent")
+    public ResponseEntity<BoardResponse> modifyContent(@RequestBody BoardRequest boardRequest){
+        return new ResponseEntity(boardService.modifyContent(boardRequest), HttpStatus.OK);
 
+    }
 
 
 

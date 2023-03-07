@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor // 파라미터가 없는 기본생성자
 public class BoardRequest {
 
+    private Long boardNo;
     private UserEntity user;
     private MypetEntity myPet;
     private String boardContents;
