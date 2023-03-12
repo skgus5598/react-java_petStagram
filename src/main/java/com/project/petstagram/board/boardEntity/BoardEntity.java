@@ -1,9 +1,11 @@
 package com.project.petstagram.board.boardEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.petstagram.board.boardDto.BoardResponse;
 import com.project.petstagram.myPet.myPetEntity.MypetEntity;
 import com.project.petstagram.user.userEntity.UserEntity;
 import lombok.*;
+import org.apache.ibatis.annotations.One;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -28,9 +30,6 @@ public class BoardEntity {
     @JoinColumn(name = "user_no") // FK , 양방향 / 연관관계의 주인
     private UserEntity user;
 
-    @OneToOne
-    @JoinColumn(name = "pet_no")  // FK, 일대일 / 펫이름은 구분자로 구문하여 한번에 저장/ 이름만 저장할거기또래
-    private MypetEntity myPet;
 
     @Column(name = "board_contents")
     private String boardContents;
@@ -38,6 +37,11 @@ public class BoardEntity {
     @Column(name = "board_regdate")
     @CreationTimestamp
     private Date boardRegdate;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "boardNo", cascade = CascadeType.ALL)
+    private List<BoardPetListEntity> boardPetListEntities;
+
 
 
 

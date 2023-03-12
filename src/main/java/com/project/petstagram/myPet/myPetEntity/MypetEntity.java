@@ -1,11 +1,14 @@
 package com.project.petstagram.myPet.myPetEntity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.petstagram.board.boardEntity.BoardEntity;
+import com.project.petstagram.board.boardEntity.BoardPetListEntity;
 import com.project.petstagram.user.userEntity.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -39,6 +42,10 @@ public class MypetEntity {
 
     @Column(name = "pet_img")
     private String petImg;
+
+
+
+
 
  /*   @Builder
     public MypetEntity (){

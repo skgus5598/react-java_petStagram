@@ -3,7 +3,9 @@ package com.project.petstagram.board.boardService;
 import com.project.petstagram.board.boardDto.BoardRequest;
 import com.project.petstagram.board.boardDto.BoardResponse;
 import com.project.petstagram.board.boardEntity.BoardEntity;
+import com.project.petstagram.board.boardEntity.BoardPetListEntity;
 import com.project.petstagram.board.boardRepo.BoardRepository;
+import com.project.petstagram.board.boardRepo.BpRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.javassist.NotFoundException;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository repository;
+    private final BpRepository bpRepository;
 
     @Override
     public List<BoardResponse> getBoardList() {
@@ -30,7 +33,20 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardResponse addContent(BoardRequest boardRequest) {
+        System.out.println("petno? " + boardRequest.getPetNo());
+
         BoardEntity boardEntity = repository.save(boardRequest.toEntity());
+
+        if (boardRequest.getPetNo().size() > 1){
+            System.out.println("size? :" + boardRequest.getPetNo().size());
+            for(int i : boardRequest.getPetNo()){
+                System.out.println("i ::: " + i);
+                bpRepository.save(BoardPetListEntity.builder()
+                                    .boardNo(boardEntity)  // 여기 이상 ~
+                                    .petNo(i)
+                                    .build());
+            }
+        }
         return new BoardResponse(boardEntity);
     }
 
