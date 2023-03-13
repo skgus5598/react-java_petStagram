@@ -1,5 +1,6 @@
 package com.project.petstagram.board.boardEntity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.petstagram.board.boardDto.BoardResponse;
 import com.project.petstagram.myPet.myPetEntity.MypetEntity;
@@ -38,11 +39,15 @@ public class BoardEntity {
     @CreationTimestamp
     private Date boardRegdate;
 
-    @JsonManagedReference
+    @JsonManagedReference  // 순환참조 방지
+    @JsonIgnore  // 무한루프에 빠지지 않게..
     @OneToMany(mappedBy = "boardNo", cascade = CascadeType.ALL)
     private List<BoardPetListEntity> boardPetListEntities;
 
 
+    public BoardEntity(Long boardNo){
+        this.boardNo = boardNo;
+    }
 
 
 }

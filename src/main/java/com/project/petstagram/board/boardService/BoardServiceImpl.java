@@ -38,11 +38,9 @@ public class BoardServiceImpl implements BoardService {
         BoardEntity boardEntity = repository.save(boardRequest.toEntity());
 
         if (boardRequest.getPetNo().size() > 1){
-            System.out.println("size? :" + boardRequest.getPetNo().size());
             for(int i : boardRequest.getPetNo()){
-                System.out.println("i ::: " + i);
                 bpRepository.save(BoardPetListEntity.builder()
-                                    .boardNo(boardEntity)  // 여기 이상 ~
+                                    .boardNo(new BoardEntity(boardEntity.getBoardNo()))
                                     .petNo(i)
                                     .build());
             }

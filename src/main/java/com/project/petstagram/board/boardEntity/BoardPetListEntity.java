@@ -1,6 +1,7 @@
 package com.project.petstagram.board.boardEntity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.petstagram.myPet.myPetEntity.MypetEntity;
 import lombok.*;
 import org.apache.ibatis.annotations.Many;
@@ -21,7 +22,7 @@ public class BoardPetListEntity {
     @SequenceGenerator( name = "boardPetList_seq_generator", sequenceName = "boardpetlist_seq", initialValue = 1, allocationSize = 1)
     private Long bpId;
 
-    @JsonBackReference
+    @JsonBackReference  // 순환참조 방지
     @ManyToOne
     @JoinColumn(name = "boardNo")
     private BoardEntity boardNo;
