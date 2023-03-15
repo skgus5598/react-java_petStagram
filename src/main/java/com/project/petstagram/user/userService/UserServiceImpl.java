@@ -22,6 +22,19 @@ public class UserServiceImpl implements  UserService{
 
     private final UserRepository userRepository;
 
+
+    @Override
+    public int loginUser(UserRequest userRequest) {
+        UserEntity userEntity =  userRepository.findByUserId(userRequest.getUserId());
+        if (userEntity == null){
+            return 2; // 없는 유저
+        }else if(userRequest.getUserPwd().equals(userEntity.getUserPwd())){
+            return 1; // 로그인 성공
+        }else{
+            return 0; // 비밀번호 틀림
+        }
+    }
+
     @Override
     public int registerUser(UserRequest userRequest) {
         //Optional은 값이 null일 경우 에러를 방지

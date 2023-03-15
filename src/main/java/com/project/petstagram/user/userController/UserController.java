@@ -11,24 +11,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.List;
 
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController("/")
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/mypet")
-    public ResponseEntity<String>  loginPage() {
-        return new ResponseEntity<>(HttpStatus.OK);
+
+    @PostMapping("/loginUser")
+    public int loginUser(@RequestBody UserRequest userRequest){
+        return userService.loginUser(userRequest);
     }
 
-    @GetMapping("/list")
-    public List<String> list(){
-        return Arrays.asList("1","2","3","4");
-    }
-    ///////////////////////////////////////////////////////////////
-
-    @PostMapping("/registerUser")
+    @PostMapping("/registerUser") // 회원가입
     public ResponseEntity<UserResponse> registerUser(@RequestBody UserRequest userRequest){
         return new ResponseEntity(userService.registerUser(userRequest), HttpStatus.OK);
     }
