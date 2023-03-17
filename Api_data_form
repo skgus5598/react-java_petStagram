@@ -1,0 +1,31 @@
+/* 게시글 추가 */
+http://localhost:8888/board/addContent
+
+{
+    "user" : {
+        "userNo" : 11,
+        "userId" : "test2233"
+    },
+    "boardContents" : "cccctest",
+    "petNo" : [2,1]
+}
+
+/* 게시글 content만 수정 */
+http://localhost:8888/board/modifyContent
+
+{
+    "boardNo" : 211,
+    "user" : {
+        "userNo" : 11,
+        "userId" : "admin2"
+    },
+    "myPet" : {
+        "petNo" : "1",
+        "userNo" : {
+            "userNo" : 11,
+            "userId" : "admin2"
+        },
+        "petName" : "micky"
+    },
+    "boardContents" : "modifytest"
+}
