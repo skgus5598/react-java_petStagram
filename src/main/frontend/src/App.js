@@ -1,12 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import {useEffect, useState} from "react";
+import {Routes, Link, Route, useNavigate, Outlet} from "react-router-dom";
 import LoginPage from "./component/LoginPage";
+import RegisterPage from "./component/RegisterPage";
+import MainPage from "./component/MainPage";
 
 function App() {
   return (
     <div className="App">
-        <LoginPage/>
+        <h1 style={ {textAlign : "center"}}>PetStagram</h1>
+        <Outlet/>
+
+        <Routes>
+            <Route path="/" element={ <LoginPage/> }></Route>
+            <Route path="/register" element={ <RegisterPage />}></Route>
+            <Route path='/main' element={ <MainPage /> }></Route>
+            <Route></Route>
+        </Routes>
 
     </div>
   );
